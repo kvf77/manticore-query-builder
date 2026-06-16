@@ -1,0 +1,22 @@
+kvf77/manticore-query-builder
+Copyright 2025 kvf77 (https://github.com/kvf77)
+
+This product is a derivative work based on:
+
+    foolz/sphinxql-query-builder
+    Copyright foolz (support@foolz.us)
+    Licensed under the Apache License, Version 2.0
+    https://github.com/FoolCode/SphinxQL-Query-Builder
+
+This product includes software originally developed by foolz and contributors.
+
+Changes made by kvf77 relative to the original work include (but are not limited to):
+  - Relicensed namespace from Foolz\SphinxQL to Kvf77\Manticore.
+  - Added orWhere() and nested where() groups (Closure) with arbitrary nesting depth.
+  - Added REGEX() filter support to the WHERE clause (Manticore-specific).
+  - Unified and simplified the WHERE compiler (AND/OR/groups/regex).
+  - Added valuesAmount() helper.
+  - Modernised the codebase for PHP 8.3+ (declare(strict_types=1), etc.).
+  - Removed the external illuminate/database coupling from the core.
+
+This file is provided in accordance with section 4(d) of the Apache License, Version 2.0.

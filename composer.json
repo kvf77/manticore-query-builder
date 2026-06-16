@@ -1,0 +1,64 @@
+{
+    "name": "kvf77/manticore-query-builder",
+    "description": "A modern PHP query builder for Manticore Search (and Sphinx) speaking the SphinxQL dialect. A maintained fork of foolz/sphinxql-query-builder.",
+    "keywords": ["manticore", "manticoresearch", "sphinxql", "sphinx", "search", "query builder", "fulltext", "laravel"],
+    "homepage": "https://github.com/kvf77/manticore-query-builder",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "kvf77",
+            "homepage": "https://github.com/kvf77"
+        },
+        {
+            "name": "foolz",
+            "email": "support@foolz.us",
+            "role": "Original author of foolz/sphinxql-query-builder"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-pdo": "*"
+    },
+    "require-dev": {
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^11.0"
+    },
+    "suggest": {
+        "ext-mysqli": "To use the MySQLi driver instead of PDO",
+        "illuminate/support": "To use the Laravel integration (service provider, facade, config)"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kvf77\\Manticore\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kvf77\\Manticore\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kvf77\\Manticore\\Laravel\\ManticoreServiceProvider"
+            ],
+            "aliases": {
+                "Manticore": "Kvf77\\Manticore\\Laravel\\Facades\\Manticore"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse",
+        "check": [
+            "@analyse",
+            "@test"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
