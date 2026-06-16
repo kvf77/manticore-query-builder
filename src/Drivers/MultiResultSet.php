@@ -153,7 +153,7 @@ class MultiResultSet implements MultiResultSetInterface
     public function current(): mixed
     {
         $rowSet = $this->rowSet;
-        unset($this->rowSet);
+        $this->rowSet = null;
 
         return $rowSet;
     }

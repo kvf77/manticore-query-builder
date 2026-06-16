@@ -127,7 +127,7 @@ class ResultSet implements ResultSetInterface
     public function current(): mixed
     {
         $row = $this->fetched;
-        unset($this->fetched);
+        $this->fetched = null;
 
         return $row;
     }
