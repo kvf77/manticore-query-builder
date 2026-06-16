@@ -1,0 +1,8 @@
+# Keep distributed (composer) packages lean: exclude dev-only paths from `composer install --prefer-dist`.
+/.github            export-ignore
+/docs               export-ignore
+/tests              export-ignore
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/phpunit.xml        export-ignore
+/phpstan.neon       export-ignore

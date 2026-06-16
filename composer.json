@@ -3,6 +3,10 @@
     "description": "A modern PHP query builder for Manticore Search (and Sphinx) speaking the SphinxQL dialect. A maintained fork of foolz/sphinxql-query-builder.",
     "keywords": ["manticore", "manticoresearch", "sphinxql", "sphinx", "search", "query builder", "fulltext", "laravel"],
     "homepage": "https://github.com/kvf77/manticore-query-builder",
+    "support": {
+        "issues": "https://github.com/kvf77/manticore-query-builder/issues",
+        "source": "https://github.com/kvf77/manticore-query-builder"
+    },
     "license": "Apache-2.0",
     "authors": [
         {

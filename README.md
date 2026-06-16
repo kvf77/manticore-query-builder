@@ -1,5 +1,9 @@
 # Manticore Query Builder
 
+[![tests](https://github.com/kvf77/manticore-query-builder/actions/workflows/tests.yml/badge.svg)](https://github.com/kvf77/manticore-query-builder/actions/workflows/tests.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![PHP ^8.3](https://img.shields.io/badge/php-%5E8.3-777bb4.svg)](composer.json)
+
 A modern PHP query builder for [Manticore Search](https://manticoresearch.com/)
 (and Sphinx) speaking the **SphinxQL** dialect over the MySQL protocol.
 
