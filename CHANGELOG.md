@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-06-16
+
 ### Added
 - `orWhere()` and nested `where(Closure)` groups with arbitrary nesting depth.
 - `regex()` — adds a Manticore `REGEX()` filter to the `WHERE` clause.
