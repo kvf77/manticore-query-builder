@@ -4,13 +4,20 @@ declare(strict_types=1);
 
 namespace Kvf77\Manticore\Drivers;
 
+use Kvf77\Manticore\Events\QueryExecuted;
 use Kvf77\Manticore\Exception\ConnectionException;
 use Kvf77\Manticore\Expression;
 use mysqli;
 use PDO;
 
-abstract class ConnectionBase implements ConnectionInterface
+abstract class ConnectionBase implements ConnectionInterface, HasQueryListeners
 {
+    /**
+     * Registered query listeners.
+     *
+     * @var list<callable(QueryExecuted): void>
+     */
+    protected array $listeners = [];
     /**
      * The connection parameters for the database server.
      *
@@ -167,4 +174,39 @@ abstract class ConnectionBase implements ConnectionInterface
      */
     abstract public function connect(): bool;
 
+    /**
+     * @inheritdoc
+     */
+    public function listen(callable $listener): void
+    {
+        $this->listeners[] = $listener;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function flushListeners(): void
+    {
+        $this->listeners = [];
+    }
+
+    /**
+     * Notify registered listeners that a query has been executed.
+     *
+     * @param  string  $query  The compiled query string.
+     * @param  float  $startedAt  The microtime(true) captured before execution.
+     * @param  ResultSetInterface|null  $result  The result set (null for batches).
+     */
+    protected function dispatchQuery(string $query, float $startedAt, ?ResultSetInterface $result = null): void
+    {
+        if ($this->listeners === []) {
+            return;
+        }
+
+        $event = new QueryExecuted($query, (microtime(true) - $startedAt) * 1000, $result);
+
+        foreach ($this->listeners as $listener) {
+            $listener($event);
+        }
+    }
 }

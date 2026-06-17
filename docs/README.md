@@ -12,6 +12,8 @@ Full documentation for **kvf77/manticore-query-builder**.
 7. [Helpers & Percolate](07-helpers-percolate.md) — `SHOW META`, `CALL SNIPPETS`, percolate queries
 8. [Laravel integration](08-laravel.md) — service provider, config, facade, manager
 9. [Migrating from foolz/sphinxql-query-builder](09-migrating-from-foolz.md) — namespace and behaviour changes
+10. [Query listener](11-query-listener.md) — observe every Manticore query (the `DB::listen()` counterpart): logging, timing, capture
+11. [Testing](12-testing.md) — `FakeConnection`: canned result sets, recorded queries, stubbing search without a live index
 
 > Throughout the docs, `$conn` is a connection created as shown in
 > [Getting started](01-getting-started.md), and `$qb` is `new SphinxQL($conn)`.

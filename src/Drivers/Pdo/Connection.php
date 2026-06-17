@@ -24,6 +24,8 @@ class Connection extends ConnectionBase
     {
         $this->ensureConnection();
 
+        $started = microtime(true);
+
         $statement = $this->connection->prepare($query);
 
         try {
@@ -33,7 +35,11 @@ class Connection extends ConnectionBase
                 (int)$exception->getCode(), $exception);
         }
 
-        return new ResultSet(new ResultSetAdapter($statement));
+        $result = new ResultSet(new ResultSetAdapter($statement));
+
+        $this->dispatchQuery($query, $started, $result);
+
+        return $result;
     }
 
     /**
@@ -92,13 +98,19 @@ class Connection extends ConnectionBase
             throw new SphinxQLException('The Queue is empty.');
         }
 
+        $started = microtime(true);
+
         try {
             $statement = $this->connection->query(implode(';', $queue));
         } catch (PDOException $exception) {
             throw new DatabaseException($exception->getMessage() .' [ '.implode(';', $queue).']', $exception->getCode(), $exception);
         }
 
-        return new MultiResultSet(new MultiResultSetAdapter($statement));
+        $result = new MultiResultSet(new MultiResultSetAdapter($statement));
+
+        $this->dispatchQuery(implode('; ', $queue), $started);
+
+        return $result;
     }
 
     /**

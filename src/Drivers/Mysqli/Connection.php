@@ -97,6 +97,8 @@ class Connection extends ConnectionBase
     {
         $this->ensureConnection();
 
+        $started = microtime(true);
+
         set_error_handler(static fn (int $errno, string $errstr): bool => true);
         try {
             /**
@@ -115,7 +117,11 @@ class Connection extends ConnectionBase
                 $this->getConnection()->error.' [ '.$query.']');
         }
 
-        return new ResultSet(new ResultSetAdapter($this, $resource));
+        $result = new ResultSet(new ResultSetAdapter($this, $resource));
+
+        $this->dispatchQuery($query, $started, $result);
+
+        return $result;
     }
 
     /**
@@ -131,6 +137,8 @@ class Connection extends ConnectionBase
 
         $this->ensureConnection();
 
+        $started = microtime(true);
+
         $this->getConnection()->multi_query(implode(';', $queue));
 
         if ($this->getConnection()->error) {
@@ -138,7 +146,11 @@ class Connection extends ConnectionBase
                 $this->getConnection()->error.' [ '.implode(';', $queue).']');
         }
 
-        return new MultiResultSet(new MultiResultSetAdapter($this));
+        $result = new MultiResultSet(new MultiResultSetAdapter($this));
+
+        $this->dispatchQuery(implode('; ', $queue), $started);
+
+        return $result;
     }
 
     /**

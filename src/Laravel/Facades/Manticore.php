@@ -12,6 +12,7 @@ use Kvf77\Manticore\SphinxQL;
 
 /**
  * @method static ConnectionInterface connection()
+ * @method static void listen(callable $listener)
  * @method static SphinxQL query()
  * @method static SphinxQL select(string ...$columns)
  * @method static Helper helper()

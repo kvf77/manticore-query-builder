@@ -31,6 +31,8 @@ Full docs live in [`docs/`](docs/):
 - [Helpers & Percolate](docs/07-helpers-percolate.md)
 - [Laravel integration](docs/08-laravel.md)
 - [Migrating from foolz/sphinxql-query-builder](docs/09-migrating-from-foolz.md)
+- [Query listener](docs/11-query-listener.md) — observe every Manticore query (the `DB::listen()` counterpart)
+- [Testing](docs/12-testing.md) — `FakeConnection`: canned results, recorded queries, no live index
 
 ## Installation
 

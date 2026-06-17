@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Kvf77\Manticore\Laravel;
 
 use Kvf77\Manticore\Drivers\ConnectionInterface;
+use Kvf77\Manticore\Drivers\HasQueryListeners;
 use Kvf77\Manticore\Drivers\MultiResultSetInterface;
 use Kvf77\Manticore\Drivers\ResultSetInterface;
+use Kvf77\Manticore\Events\QueryExecuted;
 use Kvf77\Manticore\Helper;
 use Kvf77\Manticore\SphinxQL;
 
@@ -26,6 +28,21 @@ class Manticore
     public function connection(): ConnectionInterface
     {
         return $this->connection;
+    }
+
+    /**
+     * Register a listener invoked after every executed Manticore query — the
+     * Manticore-layer counterpart to Laravel's `DB::listen()`.
+     *
+     * No-op if the underlying connection does not support listeners.
+     *
+     * @param  callable(QueryExecuted): void  $listener
+     */
+    public function listen(callable $listener): void
+    {
+        if ($this->connection instanceof HasQueryListeners) {
+            $this->connection->listen($listener);
+        }
     }
 
     /**
